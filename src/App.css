@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css?family=Abril+Fatface|Oswald');
+
+body {
+  background-image: url(https://i.imgur.com/ZuWz73X.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: "Oswald", sans-serif;
+}
+
+h1 {
+  font-family: "Abril Fatface", serif;
+  font-size: 3.5em;
+  font-weight: 400;
+  text-align: center;
+}
+
+p {
+  font-size: 1.2em;
+}
+
+.lead {
+  font-size: 1.6em;
+  text-align: center;
+}
+
+.App {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  min-width: 30%;
+  min-height: 70%;
+  padding: 1rem 1.5rem;
+  border-radius: 25px;
+  -moz-box-shadow: 0 0 25px rgb(165, 165, 165);
+  -webkit-box-shadow: 0 0 25px rgb(165, 165, 165);
+  box-shadow: 0 0 25px rgb(165, 165, 165);
+  text-align: center;
+}

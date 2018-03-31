@@ -1,0 +1,8 @@
+.container {
+  max-width: 30%;
+  margin: 0 auto;
+}
+
+.temperature {
+  font-size: 3.5em;
+}
