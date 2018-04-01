@@ -1,7 +1,11 @@
 {
-  "main.css": "static/css/main.52c0524d.css",
-  "main.css.map": "static/css/main.52c0524d.css.map",
-  "main.js": "static/js/main.e2f017e3.js",
-  "main.js.map": "static/js/main.e2f017e3.js.map",
-  "static\\media\\trianglify.svg": "static/media/trianglify.fc4d90e5.svg"
+  "main.css": "static/css/main.414d74d8.css",
+  "main.css.map": "static/css/main.414d74d8.css.map",
+  "main.js": "static/js/main.f8640591.js",
+  "main.js.map": "static/js/main.f8640591.js.map",
+  "static\\media\\trianglify.svg": "static/media/trianglify.fc4d90e5.svg",
+  "static\\media\\weathericons-regular-webfont.eot": "static/media/weathericons-regular-webfont.e7ef2b44.eot",
+  "static\\media\\weathericons-regular-webfont.svg": "static/media/weathericons-regular-webfont.b2233bc1.svg",
+  "static\\media\\weathericons-regular-webfont.ttf": "static/media/weathericons-regular-webfont.2ca3df09.ttf",
+  "static\\media\\weathericons-regular-webfont.woff": "static/media/weathericons-regular-webfont.f5b0d0d9.woff"
 }
