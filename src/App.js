@@ -5,12 +5,13 @@ import "./App.css";
 import * as weatherIcons from "./weatherIcons.json";
 import "weather-icons/css/weather-icons.css";
 
-const API_KEY = "***";
+const API_KEY = "KEY";
 
 class App extends Component {
   state = {
     temperature: undefined,
     city: undefined,
+    country: undefined,
     humidity: undefined,
     description: undefined,
     icon: undefined,
@@ -20,6 +21,8 @@ class App extends Component {
   getWeather = async e => {
     e.preventDefault();
     const city = e.target.elements.city.value;
+    const country = e.target.elements.country.value;
+    e.target.reset();
 
     try {
       const api_call = await fetch(
@@ -34,10 +37,13 @@ class App extends Component {
         icon = 'day-' + icon;
       }
 
-      if (city) {
+      console.log(data);
+
+      if (city && country) {
         this.setState({
           temperature: Math.round(data.main.temp),
           city: data.name,
+          country: data.sys.country,
           humidity: data.main.humidity,
           description: data.weather[0].description,
           icon: prefix + icon,
@@ -47,16 +53,18 @@ class App extends Component {
         this.setState({
           temperature: undefined,
           city: undefined,
+          country: undefined,
           humidity: undefined,
           description: undefined,
           icon: undefined,
-          error: "Please enter the value"
+          error: "Please enter city and country name"
         });
       }
     } catch (e) {
       this.setState({
         temperature: undefined,
         city: undefined,
+        country: undefined,
         humidity: undefined,
         description: undefined,
         icon: undefined,
@@ -74,6 +82,7 @@ class App extends Component {
         <Weather
           temperature={this.state.temperature}
           city={this.state.city}
+          country={this.state.country}
           humidity={this.state.humidity}
           description={this.state.description}
           icon={this.state.icon}

@@ -6,16 +6,18 @@ const Weather = props => (
     <div className="container">
       {props.temperature && <p className="temperature">{props.temperature} °C</p>}
       {props.icon && <i className={props.icon} alt={props.description} />}
-      {props.city &&
-        props.city && (
-          <p>
-            Location: {props.city}
-          </p>
-        )}
-      {props.humidity && <p>Humidity: {props.humidity} </p>}
-      {props.description && <p>Conditions: {props.description} </p>}
-      
-      {props.error && <p>{props.error}</p>}
+      <div className="info">
+        {props.city &&
+          props.city && (
+            <p>
+              Location: {props.city}, {props.country}
+            </p>
+          )}
+        {props.humidity && <p>Humidity: {props.humidity} </p>}
+        {props.description && <p>Conditions: {props.description} </p>}
+        
+        {props.error && <p>{props.error}</p>}
+      </div>
     </div>
   </div>
 );

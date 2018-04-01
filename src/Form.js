@@ -6,6 +6,8 @@ class Form extends Component {
     return (
       <form ref="searchForm" onSubmit={this.props.getWeather} className={styles.Form}>
         <input type="text" name="city" placeholder="City" />
+        <input type="text" name="country" placeholder="Country" />
+        
         <input type="submit" className="button" value="Search" />
       </form>
     );
