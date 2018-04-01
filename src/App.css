@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Abril+Fatface|Oswald');
 
 body {
-  background-image: url(https://i.imgur.com/ZuWz73X.png);
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-image: url(./trianglify.svg);
+  background-repeat: repeat-y;
+  background-size: initial;
   font-family: "Oswald", sans-serif;
 }
 
@@ -16,6 +16,7 @@ h1 {
 
 p {
   font-size: 1.2em;
+  line-height: 1.2em;
 }
 
 .lead {
@@ -30,11 +31,20 @@ p {
   transform: translate(-50%, -50%);
   background-color: white;
   min-width: 30%;
-  min-height: 70%;
+  min-height: 80%;
   padding: 1rem 1.5rem;
   border-radius: 25px;
   -moz-box-shadow: 0 0 25px rgb(165, 165, 165);
   -webkit-box-shadow: 0 0 25px rgb(165, 165, 165);
   box-shadow: 0 0 25px rgb(165, 165, 165);
   text-align: center;
+}
+
+@media (max-width: 1200px) {
+ h1 {
+   font-size: 2em;
+ }
+ .lead {
+   font-size: 1em;
+ }
 }

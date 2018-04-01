@@ -1,8 +1,22 @@
 .container {
-  max-width: 30%;
+  max-width: 40%;
   margin: 0 auto;
 }
 
 .temperature {
   font-size: 3.5em;
 }
+
+i {
+  font-size: 5em;
+  color: #0B6FAD;
+}
+
+@media (max-width: 1200px) {
+  .temperature {
+    font-size: 2em;
+  }
+  .container {
+    max-width: 70%;
+  }
+ }
