@@ -26,7 +26,8 @@ class App extends Component {
 
     try {
       const api_call = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
+        // `api.openweathermap.org/data/2.5/&mode=json&APPID=${API_KEY}`
+        `https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${ API_KEY }&units=metric`
       );
       const data = await api_call.json();
       const prefix = "wi wi-";
