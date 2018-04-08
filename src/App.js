@@ -4,25 +4,33 @@ import Weather from "./Weather";
 import "./App.css";
 import * as weatherIcons from "./weatherIcons.json";
 import "weather-icons/css/weather-icons.css";
+import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 
-const API_KEY = "KEY";
+const API_KEY = "5aa634ad30831bfb81a9ffbbd5aa914a";
 
 class App extends Component {
   state = {
     temperature: undefined,
-    city: undefined,
-    country: undefined,
+    address: "Poznań",
     humidity: undefined,
     description: undefined,
     icon: undefined,
     error: undefined
   };
 
+  handleFormSubmit = e => {
+    e.preventDefault();
+    geocodeByAddress(this.state.address)
+      .then(results => getLatLng(results[0]))
+      .then(latLng => console.log('Success', latLng))
+      .catch(error => console.error('Error', error));
+    this.onChange = address => this.setState({ address });
+  };
+
   getWeather = async e => {
     e.preventDefault();
     const city = e.target.elements.city.value;
     const country = e.target.elements.country.value;
-    e.target.reset();
 
     try {
       const api_call = await fetch(
@@ -75,11 +83,15 @@ class App extends Component {
   };
 
   render() {
+    const inputProps = {
+      value: this.state.address,
+      onChange: this.onChange
+    };
     return (
       <div className="App">
         <h1>Weather application</h1>
         <span className="lead">Get current weather of your location</span>
-        <Form getWeather={this.getWeather} />
+        <Form handleFormSubmit={this.handleFormSubmit} inputProps={inputProps}/>
         <Weather
           temperature={this.state.temperature}
           city={this.state.city}
