@@ -3,11 +3,10 @@ import styles from "./Form.css";
 import PlacesAutocomplete from "react-places-autocomplete";
 
 class Form extends Component {
-
   render() {
     return (
       <form name="search" onSubmit={this.props.handleFormSubmit} className={styles.Form}>
-        <PlacesAutocomplete inputProps={this.props.inputProps} placeholder="City name" />
+        <PlacesAutocomplete inputProps={this.props.inputProps} />
         <input type="submit" className="button" value="Search" />
       </form>
     );

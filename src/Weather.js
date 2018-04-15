@@ -3,7 +3,7 @@ import styles from "./Weather.css";
 
 const Weather = props => (
   <div className={styles.Weather}>
-    <div className="container">
+    {/* <div className="container">
       {props.temperature && <p className="temperature">{props.temperature} °C</p>}
       {props.icon && <i className={props.icon} alt={props.description} />}
       <div className="info">
@@ -18,7 +18,7 @@ const Weather = props => (
         
         {props.error && <p>{props.error}</p>}
       </div>
-    </div>
+    </div> */}
   </div>
 );
 
