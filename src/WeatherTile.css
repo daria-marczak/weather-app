@@ -1,0 +1,7 @@
+.WeatherTile {
+  background-color: #0B6FAD;
+  color: white;
+  padding: 0.5em;
+  min-width: 5%;
+  min-height: 50%;
+}

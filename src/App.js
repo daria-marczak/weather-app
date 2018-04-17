@@ -17,7 +17,7 @@ class App extends Component {
     data: {}
   };
 
-  onChange = (address) => this.setState({ address });
+  onChange = address => this.setState({ address });
 
   handleFormSubmit = e => {
     e.preventDefault();
@@ -30,20 +30,26 @@ class App extends Component {
           lat,
           lng
         });
-        fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=${API_KEY}&units=metric`)
+        fetch(
+          `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=${API_KEY}&units=metric`
+        )
           .then(response => response.json())
           .then(data => {
             const dataWeather = data;
             this.setState({
               data: dataWeather.list
             });
-            // dataWeather.list.forEach(weatherDay => console.log(weatherDay.dt)); // This gives me every day's ID number so that I can map it
-          })
-        })
-        .catch(error => console.error("Error", error));
+          });
+      })
+      .catch(error => console.error("Error", error));
   };
 
-  
+  // checkDay = () => {
+  //   const weatherData = this.state.data;
+  //   Object.keys(weatherData).map((data, key) => {
+
+  //   })
+  // }
 
   render() {
     const inputProps = {
@@ -51,6 +57,7 @@ class App extends Component {
       onChange: this.onChange
     };
     const weatherData = this.state.data;
+
     return (
       <div className="App">
         <h1>Weather application</h1>
@@ -61,13 +68,27 @@ class App extends Component {
         />
         <Weather />
         <ul>
-          {Object.keys(weatherData).map((data, key) => (
-            <WeatherTile
-              key={key}
-              index={key}
-              date={weatherData[key].dt_txt}
-            />
-          ))}
+          {
+            
+            Object.keys(weatherData).map((data, key) => {
+            // const hour = weatherData[key].dt_txt.substring(10);
+            // console.log(hour);
+            
+            const myValues = Object.values(weatherData[key]);
+            const realHour = myValues.join("").substring(10); // here is the hour of the object
+            // console.log(myValues);
+            const hours = realHour.indexOf("12:00:00") > -1;
+            // console.log(hours); // true or false value
+            hours == true ? console.log(weatherData[key]) : false; // logs the whole object for the middays
+            
+            // const matchingKeys = myValues.filter(hours => hours == true ? console.log("yeah") : false);
+            // matchingKeys.map(key => <WeatherTile
+            //   key={key}
+            //   index={key}
+            //   date={weatherData[key].dt_txt}
+            // />)
+            
+          })}
         </ul>
       </div>
     );

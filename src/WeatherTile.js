@@ -1,7 +1,8 @@
 import React from "react";
+import "./WeatherTile.css";
 
 const WeatherTile = props => (
-  <li>{props.date}</li>
+  <li className="WeatherTile">{props.date}</li>
 )
       
 
