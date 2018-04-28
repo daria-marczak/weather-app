@@ -1,8 +1,9 @@
 import React from "react";
 import "./WeatherTile.css";
+import 'bulma/css/bulma.css'
 
 const WeatherTile = props => (
-  <li className="WeatherTile">{props.date}</li>
+  <div className="column is-one-fifth WeatherTile">{props.date}</div>
 )
       
 

@@ -6,8 +6,9 @@ import "./App.css";
 import * as weatherIcons from "./weatherIcons.json";
 import "weather-icons/css/weather-icons.css";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
+import moment from "moment";
 
-const API_KEY = "5aa634ad30831bfb81a9ffbbd5aa914a";
+const API_KEY = "API";
 
 class App extends Component {
   state = {
@@ -46,13 +47,60 @@ class App extends Component {
       .catch(error => console.error("Error", error));
   };
 
+  generateWeatherData() {
+    const weatherData = this.state.data;
+    if (!weatherData) return null;
+    let days = [];
+    let today = moment().date();
+    const newData = [...weatherData].filter( (day) => {
+      let dateFromAPI = moment.unix(day.dt).date();
+      if (days.indexOf(dateFromAPI) > -1){
+        return false;
+      } else {
+        days.push(dateFromAPI);
+        return true;
+      };
+    });
+
+    return newData.map((day, item) => {
+      day.date_text = moment.unix(day.dt).format('dddd, MMM D');
+        if (item === 0) {
+          return <div className="column is-12">
+            <Weather key={day.dt} />
+          </div>
+        }
+    });
+  }
+
+  generateTileData() {
+    const weatherData = this.state.data;
+    if (!weatherData) return null;
+    let days = [];
+    let today = moment().date();
+    const newData = [...weatherData].filter( (day) => {
+      let dateFromAPI = moment.unix(day.dt).date();
+      if (days.indexOf(dateFromAPI) > -1){
+        return false;
+      } else {
+        days.push(dateFromAPI);
+        return true;
+      };
+    });
+
+    return newData.map((day, item) => {
+      day.date_text = moment.unix(day.dt).format('dddd, MMM D');
+        return (
+            <WeatherTile key={day.dt} {...day} date={day.dt_txt}></WeatherTile>
+        )
+    });
+  }
+
   render() {
       const inputProps = {
         value: this.state.address,
         onChange: this.onChange
       };
       const weatherData = this.state.data;
-
       return (
         <div className="App">
           <h1> Weather application </h1>
@@ -61,23 +109,12 @@ class App extends Component {
               handleFormSubmit = { this.handleFormSubmit }
               inputProps = { inputProps }
             />
-            <Weather />
-          <ul>
-            {
-              [...weatherData].map((data) => {
-                const myValues = data.dt_txt;
-                const realHour = myValues.substring(10); 
-                const hours = realHour.indexOf("12:00:00") > -1;
-                console.log(hours); // true or false value
-                hours === true ? console.log(data) : false;
-                // hours === true ? Object.values(data).map((day) => (
-                //   <WeatherTile date = { data.dt_txt }/>))
-                hours === true ? [...data].map((day, key) => console.log(day, key)) : false // This gives a true / false value
-                return hours === true ? [...data].map((day, key) => (<WeatherTile date={data.dt_txt}/>)) : false // This gives a true / false value
-                
-                })
-              }
-          </ul>
+            <div className="columns weather">
+              {this.generateWeatherData()}
+            </div>
+            <div className="columns is-gapless tiles">
+              { this.generateTileData() }
+            </div>
         </div>
           );
         }

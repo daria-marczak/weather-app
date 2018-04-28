@@ -1,8 +1,10 @@
 import React from "react";
 import styles from "./Weather.css";
+import 'bulma/css/bulma.css';
 
 const Weather = props => (
-  <div className={styles.Weather}>
+  <div className="column is-12">
+    <h4 className="forecast-title">Forecast for next 5 days</h4>
     {/* <div className="container">
       {props.temperature && <p className="temperature">{props.temperature} °C</p>}
       {props.icon && <i className={props.icon} alt={props.description} />}
