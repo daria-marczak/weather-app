@@ -30,7 +30,7 @@ p {
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
-  min-width: 80%;
+  min-width: 60%;
   min-height: 80%;
   padding: 1rem 1.5rem;
   border-radius: 25px;
@@ -44,6 +44,8 @@ p {
 
 .tiles {
   max-width: 100%;
+  margin: 0 auto;  
+  align-items: center;
 }
 
 @media (max-width: 1200px) {

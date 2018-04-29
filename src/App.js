@@ -8,7 +8,7 @@ import "weather-icons/css/weather-icons.css";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import moment from "moment";
 
-const API_KEY = "API";
+const API_KEY = "APIKEY";
 
 class App extends Component {
   state = {
@@ -46,7 +46,7 @@ class App extends Component {
       })
       .catch(error => console.error("Error", error));
   };
-
+  
   generateWeatherData() {
     const weatherData = this.state.data;
     if (!weatherData) return null;
@@ -63,10 +63,9 @@ class App extends Component {
     });
 
     return newData.map((day, item) => {
-      day.date_text = moment.unix(day.dt).format('dddd, MMM D');
         if (item === 0) {
           return <div className="column is-12">
-            <Weather key={day.dt} />
+            <Weather key={day.dt} {...day} />
           </div>
         }
     });
@@ -88,9 +87,10 @@ class App extends Component {
     });
 
     return newData.map((day, item) => {
-      day.date_text = moment.unix(day.dt).format('dddd, MMM D');
+        if ( item=== 0) day.dt_txt = "Today";
         return (
-            <WeatherTile key={day.dt} {...day} date={day.dt_txt}></WeatherTile>
+          <WeatherTile key={day.dt} {...day} date={day.dt_txt}
+          ></WeatherTile>
         )
     });
   }

@@ -1,9 +1,19 @@
 .WeatherTile {
+  /* background-color: #0B6FAD;
+  color: white; */
+  padding: 0.5em;
+  max-width: 15%;
+  min-height: 50%;
+  margin-left: 0.9em !important;
+  margin-top: 3em;
+}
+
+.WeatherTile:first-child {
+  margin-left: 0em !important;
+}
+
+.inside {
   background-color: #0B6FAD;
   color: white;
-  padding: 0.5em;
-  min-width: 20%;
   min-height: 50%;
-  margin-left: 2em;
-  margin-top: 3em;
 }
