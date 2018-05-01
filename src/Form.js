@@ -3,9 +3,13 @@ import styles from "./Form.css";
 import PlacesAutocomplete from "react-places-autocomplete";
 
 class Form extends Component {
+  onClick(e) {
+    e.target.value = "";
+  }
+  
   render() {
     return (
-      <form name="search" onSubmit={this.props.handleFormSubmit} className={styles.Form}>
+      <form name="search" onClick={this.onClick} onSubmit={this.props.handleFormSubmit} className={styles.Form}>
           <div className="control">
             <PlacesAutocomplete  
               className="controlsearch"

@@ -3,12 +3,10 @@ import Form from "./Form";
 import Weather from "./Weather";
 import WeatherTile from "./WeatherTile";
 import "./App.css";
-import * as weatherIcons from "./weatherIcons.json";
-import "weather-icons/css/weather-icons.css";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import moment from "moment";
 
-const API_KEY = "APIKEY";
+const API_KEY = "API";
 
 class App extends Component {
   state = {
@@ -46,36 +44,11 @@ class App extends Component {
       })
       .catch(error => console.error("Error", error));
   };
-  
-  generateWeatherData() {
-    const weatherData = this.state.data;
-    if (!weatherData) return null;
-    let days = [];
-    let today = moment().date();
-    const newData = [...weatherData].filter( (day) => {
-      let dateFromAPI = moment.unix(day.dt).date();
-      if (days.indexOf(dateFromAPI) > -1){
-        return false;
-      } else {
-        days.push(dateFromAPI);
-        return true;
-      };
-    });
-
-    return newData.map((day, item) => {
-        if (item === 0) {
-          return <div className="column is-12">
-            <Weather key={day.dt} {...day} />
-          </div>
-        }
-    });
-  }
 
   generateTileData() {
     const weatherData = this.state.data;
     if (!weatherData) return null;
     let days = [];
-    let today = moment().date();
     const newData = [...weatherData].filter( (day) => {
       let dateFromAPI = moment.unix(day.dt).date();
       if (days.indexOf(dateFromAPI) > -1){
@@ -109,12 +82,10 @@ class App extends Component {
               handleFormSubmit = { this.handleFormSubmit }
               inputProps = { inputProps }
             />
-            <div className="columns weather">
-              {this.generateWeatherData()}
-            </div>
             <div className="columns is-gapless tiles">
               { this.generateTileData() }
             </div>
+            <Weather />
         </div>
           );
         }
