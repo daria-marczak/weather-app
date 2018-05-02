@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Abril+Fatface|Oswald');
 
+
+html {
+  background-color: transparent;
+}
+
 body {
   background-image: url(./trianglify.svg);
   background-repeat: repeat-y;
@@ -46,6 +51,20 @@ p {
   max-width: 100%;
   margin: 0 auto;  
   align-items: center;
+}
+
+a {
+  background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+  color: white;
+  padding: 0.5em;
+  min-height: 50%;
+  min-width: 15%;
+  margin-left: 0.6em !important;
+  margin-top: 3em;
+}
+
+a:hover {
+  color: white;
 }
 
 @media (max-width: 1200px) {

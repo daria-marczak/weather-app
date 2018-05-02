@@ -15,7 +15,7 @@ class Form extends Component {
               className="controlsearch"
               inputProps={this.props.inputProps}
             />
-            <button type="submit" className="button is-info" value="Search">Search</button>
+            <button type="submit" className="button" value="Search">Search</button>
           </div>
       </form>
     );

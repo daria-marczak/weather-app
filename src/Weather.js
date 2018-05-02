@@ -1,27 +1,33 @@
-import React from "react";
+import React, { Component } from "react";
 import styles from "./Weather.css";
 import 'bulma/css/bulma.css';
+import moment from "moment";
 
-const Weather = props => (
-  <div className="column is-12">
-    <h4 className="forecast-title">Forecast for next 5 days</h4>
-    {/* <div className="container">
-      {props.temperature && <p className="temperature">{props.temperature} °C</p>}
-      {props.icon && <i className={props.icon} alt={props.description} />}
-      <div className="info">
-        {props.city &&
-          props.city && (
-            <p>
-              Location: {props.city}, {props.country}
-            </p>
-          )}
-        {props.humidity && <p>Humidity: {props.humidity} </p>}
-        {props.description && <p>Conditions: {props.description} </p>}
-        
-        {props.error && <p>{props.error}</p>}
+class Weather extends Component {
+  render() {
+    // const prefix = "wi wi-";
+    const data = this.props;
+    console.log(data);
+    console.log(data.data[0])
+    return (
+      <div className="column is-twelve Weather">
+        {
+          data && (
+          <h2>
+          Detailed information about the weather for { moment(data.dt_txt).format("dddd") }
+        </h2>
+      )
+      }
       </div>
-    </div> */}
-  </div>
-);
+    );
+  }
+}
+
+// const Weather = ({ match }, props) => (
+//   <div>
+//     <h3>ID: {match.params.dateId}</h3>
+//     <p>Temperature: {this.props.route.temp}</p>
+//   </div>
+// );
 
 export default Weather;

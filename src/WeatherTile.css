@@ -1,27 +1,7 @@
-.WeatherTile {
-  /* background-color: #0B6FAD;
-  color: white; */
-  padding: 0.5em;
-  max-width: 15%;
-  min-height: 50%;
-  margin-left: 0.6em !important;
-  margin-top: 3em;
-}
+
 
 h2 {
-  margin-top: 2em;
-}
-
-.WeatherTile:first-child {
-  margin-left: 0em !important;
-}
-
-.inside {
-  background-color: #1496ED;
-  color: white;
-  min-height: 5em;
-  padding-top: 2em;
-  margin-top: 0.5em;
+  margin-bottom: 2em;
 }
 
 .temperature {
@@ -30,6 +10,6 @@ h2 {
 
 i {
   font-size: 2em;
-  margin-top: 0.2em;
-  margin-bottom: 0.5em;
+  margin-top: 0.5em;
+  margin-bottom: 0.2em;
 }

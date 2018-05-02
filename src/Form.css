@@ -17,10 +17,14 @@ input[type=text] {
 }
 
 button[type=submit] {
-  background-color: #0B6FAD;
+  background-color: #a6c1ee;
   color: white;
   border: none;
   padding: 0.5em 0.95em;
   width: 100%;
   margin-top: 0.5em;
+}
+
+button[type=submit]:hover {
+  color: white;
 }

@@ -17,7 +17,7 @@ class WeatherTile extends Component {
     return (
       <div className="column is-one-fifth WeatherTile">
         <h2>
-          {this.date === "Today" ? "Today" : moment(this.date).format("dddd")}
+          { moment(data.dt_txt).calendar().split(" at")[0] }
         </h2>
         <div className="inside">
           <p className="temperature">{Math.round(data.main.temp) + "°C"}</p>

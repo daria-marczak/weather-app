@@ -5,8 +5,9 @@ import WeatherTile from "./WeatherTile";
 import "./App.css";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import moment from "moment";
+import { BrowserRouter as Router, Link, Route} from "react-router-dom";
 
-const API_KEY = "API";
+const API_KEY = "KEY";
 
 class App extends Component {
   state = {
@@ -16,9 +17,10 @@ class App extends Component {
     data: {}
   };
 
-  onChange = address => this.setState({
-    address
-  });
+  onChange = address =>
+    this.setState({
+      address
+    });
 
   handleFormSubmit = e => {
     e.preventDefault();
@@ -32,8 +34,8 @@ class App extends Component {
           lng
         });
         fetch(
-            `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=${API_KEY}&units=metric`
-          )
+          `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=${API_KEY}&units=metric`
+        )
           .then(response => response.json())
           .then(data => {
             const dataWeather = data;
@@ -49,46 +51,52 @@ class App extends Component {
     const weatherData = this.state.data;
     if (!weatherData) return null;
     let days = [];
-    const newData = [...weatherData].filter( (day) => {
+    
+    const newData = [...weatherData].filter(day => {
       let dateFromAPI = moment.unix(day.dt).date();
-      if (days.indexOf(dateFromAPI) > -1){
+      if (days.indexOf(dateFromAPI) > -1) {
         return false;
       } else {
         days.push(dateFromAPI);
         return true;
-      };
+      }
     });
-
+    // console.log(days)
     return newData.map((day, item) => {
-        if ( item=== 0) day.dt_txt = "Today";
-        return (
-          <WeatherTile key={day.dt} {...day} date={day.dt_txt}
-          ></WeatherTile>
-        )
+      const dateId = day.dt;
+      return (
+        <Link to={`/w/${dateId}`}>
+          <WeatherTile key={day.dt} index={item} {...day} date={day.dt_txt} />
+        </Link>
+      );
     });
   }
 
   render() {
-      const inputProps = {
-        value: this.state.address,
-        onChange: this.onChange
-      };
-      const weatherData = this.state.data;
-      return (
-        <div className="App">
-          <h1> Weather application </h1>
-            <span className="lead"> Get current weather of your location </span>
-            <Form
-              handleFormSubmit = { this.handleFormSubmit }
-              inputProps = { inputProps }
-            />
-            <div className="columns is-gapless tiles">
-              { this.generateTileData() }
-            </div>
-            <Weather />
-        </div>
-          );
-        }
-      }
+    const inputProps = {
+      value: this.state.address,
+      onChange: this.onChange
+    };
+    const weatherData = this.state.data;
+    return (
+      <div className="App">
+        <h1> Weather application </h1>
+        <span className="lead"> Get current weather of your location </span>
+        <Form
+          handleFormSubmit={this.handleFormSubmit}
+          inputProps={inputProps}
+        />
+        <Router>
+          <React.Fragment>
+          <div className="columns is-gapless tiles">
+            {this.generateTileData()}
+          </div>
+         {weatherData && <Route path="/w/:dateId" render={() => <Weather {...this.state} />}/>} 
+         </React.Fragment>
+        </Router>
+      </div>
+    );
+  }
+}
 
-      export default App;
+export default App;
