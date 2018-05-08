@@ -7,7 +7,8 @@ import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import moment from "moment";
 import { BrowserRouter as Router, Link, Route} from "react-router-dom";
 
-const API_KEY = "KEY";
+
+const API_KEY = "API_KEY";
 
 class App extends Component {
   state = {
@@ -88,10 +89,10 @@ class App extends Component {
         />
         <Router>
           <React.Fragment>
-          <div className="columns is-gapless tiles">
-            {this.generateTileData()}
-          </div>
-         {weatherData && <Route path="/w/:dateId" render={() => <Weather {...this.state} />}/>} 
+            <div className="columns is-gapless tiles">
+              {this.generateTileData()}
+            </div>
+          {weatherData && <Route path="/w/:dateId" render={({ match }) => <Weather day={[...weatherData].find(day => day.dt == match.params.dateId)} />} />}
          </React.Fragment>
         </Router>
       </div>
