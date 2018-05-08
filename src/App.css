@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Abril+Fatface|Oswald');
 
+
+html {
+  background-color: transparent;
+}
+
 body {
   background-image: url(./trianglify.svg);
   background-repeat: repeat-y;
@@ -30,7 +35,7 @@ p {
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
-  min-width: 30%;
+  min-width: 60%;
   min-height: 80%;
   padding: 1rem 1.5rem;
   border-radius: 25px;
@@ -38,6 +43,28 @@ p {
   -webkit-box-shadow: 0 0 25px rgb(165, 165, 165);
   box-shadow: 0 0 25px rgb(165, 165, 165);
   text-align: center;
+  /* display: flex;
+  flex-direction: column; */
+}
+
+.tiles {
+  max-width: 100%;
+  margin: 0 auto;  
+  align-items: center;
+}
+
+a {
+  background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+  color: white;
+  padding: 0.5em;
+  min-height: 50%;
+  min-width: 15%;
+  margin-left: 0.6em !important;
+  margin-top: 3em;
+}
+
+a:hover {
+  color: white;
 }
 
 @media (max-width: 1200px) {

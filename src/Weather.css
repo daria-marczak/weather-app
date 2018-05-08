@@ -1,7 +1,9 @@
-.container {
+/* .container {
   max-width: 40%;
   margin: 0 auto;
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .temperature {
@@ -24,4 +26,12 @@ i {
   .container {
     max-width: 80%;
   }
+ } */
+
+ .Weather {
+   display: block;
+ }
+
+ h4 {
+   display: block;
  }

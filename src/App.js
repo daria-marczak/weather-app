@@ -1,106 +1,100 @@
 import React, { Component } from "react";
 import Form from "./Form";
 import Weather from "./Weather";
+import WeatherTile from "./WeatherTile";
 import "./App.css";
-import * as weatherIcons from "./weatherIcons.json";
-import "weather-icons/css/weather-icons.css";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
+import moment from "moment";
+import { BrowserRouter as Router, Link, Route} from "react-router-dom";
 
-const API_KEY = "5aa634ad30831bfb81a9ffbbd5aa914a";
+
+const API_KEY = "API_KEY";
 
 class App extends Component {
   state = {
-    temperature: undefined,
-    address: "Poznań",
-    humidity: undefined,
-    description: undefined,
-    icon: undefined,
-    error: undefined
+    address: "City name",
+    lat: null,
+    lng: null,
+    data: {}
   };
+
+  onChange = address =>
+    this.setState({
+      address
+    });
 
   handleFormSubmit = e => {
     e.preventDefault();
     geocodeByAddress(this.state.address)
       .then(results => getLatLng(results[0]))
-      .then(latLng => console.log('Success', latLng))
-      .catch(error => console.error('Error', error));
-    this.onChange = address => this.setState({ address });
+      .then(latLng => {
+        const lat = latLng.lat;
+        const lng = latLng.lng;
+        this.setState({
+          lat,
+          lng
+        });
+        fetch(
+          `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=${API_KEY}&units=metric`
+        )
+          .then(response => response.json())
+          .then(data => {
+            const dataWeather = data;
+            this.setState({
+              data: dataWeather.list
+            });
+          });
+      })
+      .catch(error => console.error("Error", error));
   };
 
-  getWeather = async e => {
-    e.preventDefault();
-    const city = e.target.elements.city.value;
-    const country = e.target.elements.country.value;
-
-    try {
-      const api_call = await fetch(
-        // `api.openweathermap.org/data/2.5/&mode=json&APPID=${API_KEY}`
-        `https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${ API_KEY }&units=metric`
-      );
-      const data = await api_call.json();
-      const prefix = "wi wi-";
-      let code = data.weather[0].id;
-      let icon = weatherIcons[code].icon;
-
-      if (!(code > 699 && code < 800) && !(code > 899 && code < 1000)) {
-        icon = 'day-' + icon;
-      }
-
-      console.log(data);
-
-      if (city && country) {
-        this.setState({
-          temperature: Math.round(data.main.temp),
-          city: data.name,
-          country: data.sys.country,
-          humidity: data.main.humidity,
-          description: data.weather[0].description,
-          icon: prefix + icon,
-          error: ""
-        });
+  generateTileData() {
+    const weatherData = this.state.data;
+    if (!weatherData) return null;
+    let days = [];
+    
+    const newData = [...weatherData].filter(day => {
+      let dateFromAPI = moment.unix(day.dt).date();
+      if (days.indexOf(dateFromAPI) > -1) {
+        return false;
       } else {
-        this.setState({
-          temperature: undefined,
-          city: undefined,
-          country: undefined,
-          humidity: undefined,
-          description: undefined,
-          icon: undefined,
-          error: "Please enter city and country name"
-        });
+        days.push(dateFromAPI);
+        return true;
       }
-    } catch (e) {
-      this.setState({
-        temperature: undefined,
-        city: undefined,
-        country: undefined,
-        humidity: undefined,
-        description: undefined,
-        icon: undefined,
-        error: "Please enter a correct city name"
-      });
-    }
-  };
+    });
+    // console.log(days)
+    return newData.map((day, item) => {
+      const dateId = day.dt;
+      return (
+        <Link to={`/w/${dateId}`}>
+          <WeatherTile key={day.dt} index={item} {...day} date={day.dt_txt} />
+        </Link>
+      );
+    });
+  }
 
   render() {
     const inputProps = {
       value: this.state.address,
       onChange: this.onChange
     };
+    const weatherData = this.state.data;
     return (
       <div className="App">
-        <h1>Weather application</h1>
-        <span className="lead">Get current weather of your location</span>
-        <Form handleFormSubmit={this.handleFormSubmit} inputProps={inputProps}/>
-        <Weather
-          temperature={this.state.temperature}
-          city={this.state.city}
-          country={this.state.country}
-          humidity={this.state.humidity}
-          description={this.state.description}
-          icon={this.state.icon}
-          error={this.state.error}
+        <h1> Weather application </h1>
+        <span className="lead"> Get current weather of your location </span>
+        <Form
+          handleFormSubmit={this.handleFormSubmit}
+          inputProps={inputProps}
         />
+        <Router>
+          <React.Fragment>
+            <div className="columns is-gapless tiles">
+              {this.generateTileData()}
+            </div>
+          {weatherData && <Route path="/w/:dateId" render={({ match }) => <Weather day={[...weatherData].find(day => day.dt == match.params.dateId)} />} />}
+         </React.Fragment>
+        </Router>
       </div>
     );
   }

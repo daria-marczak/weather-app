@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Abril+Fatface|Oswald');
 
+form {
+  padding-top: 2em;
+}
+
 input {
   font-size: 1em;
   font-family: "Oswald", sans-serif;
@@ -8,14 +12,19 @@ input {
 
 input[type=text] {
   border: none;
+  max-width: 100%;
   border-bottom: 1px solid #ccc;
-  padding: 0.5em;
-  margin-right: 1em;
 }
 
-input[type=submit] {
-  background-color: #0B6FAD;
+button[type=submit] {
+  background-color: #a6c1ee;
   color: white;
   border: none;
   padding: 0.5em 0.95em;
+  width: 100%;
+  margin-top: 0.5em;
+}
+
+button[type=submit]:hover {
+  color: white;
 }
