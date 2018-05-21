@@ -8,7 +8,7 @@ import moment from "moment";
 import { BrowserRouter as Router, Link, Route} from "react-router-dom";
 
 
-const API_KEY = "API_KEY";
+const API_KEY = "APIKEY";
 
 class App extends Component {
   state = {
@@ -24,7 +24,6 @@ class App extends Component {
     });
 
   handleFormSubmit = e => {
-    e.preventDefault();
     geocodeByAddress(this.state.address)
       .then(results => getLatLng(results[0]))
       .then(latLng => {
@@ -92,7 +91,7 @@ class App extends Component {
             <div className="columns is-gapless tiles">
               {this.generateTileData()}
             </div>
-          {weatherData && <Route path="/w/:dateId" render={({ match }) => <Weather day={[...weatherData].find(day => day.dt == match.params.dateId)} />} />}
+          {weatherData && <Route path="/w/:dateId" render={({ match }) => <Weather day={[...weatherData].find(day => day.dt === match.params.dateId)} />} />}
          </React.Fragment>
         </Router>
       </div>

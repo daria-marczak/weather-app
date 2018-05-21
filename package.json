@@ -4,6 +4,9 @@
   "private": true,
   "homepage": "http://daria-marczak.github.io/weather-app",
   "dependencies": {
+    "@vx/gradient": "0.0.161",
+    "@vx/group": "0.0.161",
+    "@vx/shape": "0.0.162",
     "bulma": "^0.7.1",
     "moment": "^2.22.1",
     "react": "^16.3.2",
