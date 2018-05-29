@@ -15,7 +15,7 @@ class WeatherTile extends Component {
       icon = "day-" + icon;
     }
     return (
-      <div className="column is-one-fifth WeatherTile">
+      <div className="column WeatherTile">
         <h2>
           { moment(data.dt_txt).calendar().split(" at")[0] }
         </h2>

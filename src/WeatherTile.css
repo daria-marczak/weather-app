@@ -1,4 +1,7 @@
-
+a {
+  display: flex;
+  justify-content: center;
+}
 
 h2 {
   margin-bottom: 2em;

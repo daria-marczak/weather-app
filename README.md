@@ -19,5 +19,5 @@ Milestones:
 - [x] Bulma incorporated
 - [x] Moment to format dates 
 - [x] React Router to switch between days
-- [ ] VX data charts
+- [ ] Victory data charts
 - [ ] Google Geolocalization for default search

@@ -5,25 +5,27 @@ import WeatherTile from "./WeatherTile";
 import "./App.css";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import moment from "moment";
-import { BrowserRouter as Router, Link, Route} from "react-router-dom";
+import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 
 
-const API_KEY = "APIKEY";
+const API_KEY = "API_KEY";
 
 class App extends Component {
   state = {
     address: "City name",
     lat: null,
     lng: null,
-    data: {}
+    data: {},
+    refresh: true
   };
 
   onChange = address =>
     this.setState({
       address
-    });
+    }
+  );
 
-  handleFormSubmit = e => {
+  handleFormSubmit = () => {
     geocodeByAddress(this.state.address)
       .then(results => getLatLng(results[0]))
       .then(latLng => {
@@ -40,18 +42,18 @@ class App extends Component {
           .then(data => {
             const dataWeather = data;
             this.setState({
-              data: dataWeather.list
+              data: dataWeather.list,
+              refresh: false
             });
           });
       })
-      .catch(error => console.error("Error", error));
+      .catch(error => console.error("Error", error));      
   };
 
   generateTileData() {
     const weatherData = this.state.data;
     if (!weatherData) return null;
     let days = [];
-    
     const newData = [...weatherData].filter(day => {
       let dateFromAPI = moment.unix(day.dt).date();
       if (days.indexOf(dateFromAPI) > -1) {
@@ -60,16 +62,21 @@ class App extends Component {
         days.push(dateFromAPI);
         return true;
       }
+      
     });
-    // console.log(days)
+    
     return newData.map((day, item) => {
-      const dateId = day.dt;
+    const dateId = day.dt;
       return (
         <Link to={`/w/${dateId}`}>
           <WeatherTile key={day.dt} index={item} {...day} date={day.dt_txt} />
         </Link>
       );
     });
+  }
+
+  componentWillUnmount() {
+    localStorage.removeItem("weather");
   }
 
   render() {
@@ -84,6 +91,7 @@ class App extends Component {
         <span className="lead"> Get current weather of your location </span>
         <Form
           handleFormSubmit={this.handleFormSubmit}
+          onEnterKeyDown={this.handleFormSubmit}
           inputProps={inputProps}
         />
         <Router>
@@ -91,7 +99,7 @@ class App extends Component {
             <div className="columns is-gapless tiles">
               {this.generateTileData()}
             </div>
-          {weatherData && <Route path="/w/:dateId" render={({ match }) => <Weather day={[...weatherData].find(day => day.dt === match.params.dateId)} />} />}
+          {weatherData && <Route exact path="/w/:dateId" render={({ match }) => <Weather data={weatherData} day={[...weatherData].find(day => day.dt == match.params.dateId)} />} />}
          </React.Fragment>
         </Router>
       </div>

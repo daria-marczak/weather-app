@@ -3,12 +3,24 @@ import styles from "./Weather.css";
 import 'bulma/css/bulma.css';
 import moment from "moment";
 
-const Weather = ({ day }) => {
-  console.log(day);
-  const data = day;
-  return (
-    <p>{data.main.temp}</p>
-  )
+class Weather extends Component {
+
+  componentDidUpdate() {
+    console.log(this.props.data);
+    const data = this.props.data;
+    localStorage.setItem("weather", JSON.stringify(data));
+  }
+  render() {
+    const data = this.props.data;
+    
+    return (
+      <div className="info">
+        {data && (<p>Here goes the info</p>)}
+      </div>
+    )
+  }
+
+  
 }
 
 export default Weather;

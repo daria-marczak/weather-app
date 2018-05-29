@@ -43,14 +43,13 @@ p {
   -webkit-box-shadow: 0 0 25px rgb(165, 165, 165);
   box-shadow: 0 0 25px rgb(165, 165, 165);
   text-align: center;
-  /* display: flex;
-  flex-direction: column; */
 }
 
 .tiles {
   max-width: 100%;
   margin: 0 auto;  
   align-items: center;
+  justify-content: center;
 }
 
 a {
