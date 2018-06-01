@@ -16,9 +16,9 @@ class WeatherTile extends Component {
     }
     return (
       <div className="column WeatherTile">
-        <h2>
+        <h3>
           { moment(data.dt_txt).calendar().split(" at")[0] }
-        </h2>
+        </h3>
         <div className="inside">
           <p className="temperature">{Math.round(data.main.temp) + "°C"}</p>
           <i className={prefix + icon} />

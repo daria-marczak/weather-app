@@ -1,37 +1,11 @@
-/* .container {
-  max-width: 40%;
-  margin: 0 auto;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-}
-
-.temperature {
-  font-size: 3.5em;
-}
-
-i {
-  font-size: 5em;
-  color: #0B6FAD;
-}
-
-.info {
-  text-align: left;
-}
-
-@media (max-width: 1200px) {
-  .temperature {
-    font-size: 2em;
-  }
-  .container {
-    max-width: 80%;
-  }
- } */
-
  .Weather {
    display: block;
  }
 
- h4 {
-   display: block;
+ .humidity {
+   max-width: 10vw;
+ }
+
+ h2 {
+   font-size: 1.5em;
  }

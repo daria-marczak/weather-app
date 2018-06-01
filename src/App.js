@@ -7,7 +7,6 @@ import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import moment from "moment";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 
-
 const API_KEY = "API_KEY";
 
 class App extends Component {
@@ -22,8 +21,7 @@ class App extends Component {
   onChange = address =>
     this.setState({
       address
-    }
-  );
+    });
 
   handleFormSubmit = () => {
     geocodeByAddress(this.state.address)
@@ -45,13 +43,16 @@ class App extends Component {
               data: dataWeather.list,
               refresh: false
             });
+            localStorage.setItem("weather", JSON.stringify(data));
           });
       })
-      .catch(error => console.error("Error", error));      
+      .catch(error => console.error("Error", error));
+      
   };
 
   generateTileData() {
     const weatherData = this.state.data;
+    localStorage.getItem("weather");    
     if (!weatherData) return null;
     let days = [];
     const newData = [...weatherData].filter(day => {
@@ -62,22 +63,22 @@ class App extends Component {
         days.push(dateFromAPI);
         return true;
       }
-      
     });
-    
+
     return newData.map((day, item) => {
-    const dateId = day.dt;
+      const dateId = day.dt;
       return (
         <Link to={`/w/${dateId}`}>
           <WeatherTile key={day.dt} index={item} {...day} date={day.dt_txt} />
         </Link>
       );
     });
-  }
+    
+  };
 
   componentWillUnmount() {
     localStorage.removeItem("weather");
-  }
+  };
 
   render() {
     const inputProps = {
@@ -99,12 +100,12 @@ class App extends Component {
             <div className="columns is-gapless tiles">
               {this.generateTileData()}
             </div>
-          {weatherData && <Route exact path="/w/:dateId" render={({ match }) => <Weather data={weatherData} day={[...weatherData].find(day => day.dt == match.params.dateId)} />} />}
-         </React.Fragment>
+            { weatherData && <Route path="/w/:dateId" exact render={(props) => <Weather {...weatherData} {...props} />}/>}
+          </React.Fragment>
         </Router>
       </div>
     );
   }
-}
+};
 
 export default App;
