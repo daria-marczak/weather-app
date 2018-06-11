@@ -17,6 +17,11 @@ class App extends Component {
     data: {},
     refresh: true
   };
+  
+  componentDidMount() {
+    const storage = localStorage.getItem("weather");    
+    this.hydrateStateWithLocalStorage();
+  }
 
   onChange = address =>
     this.setState({
@@ -47,12 +52,31 @@ class App extends Component {
           });
       })
       .catch(error => console.error("Error", error));
-      
   };
 
+  hydrateStateWithLocalStorage() {
+    for (let key in this.state) {
+      if (localStorage.hasOwnProperty(key)) {
+        let value = localStorage.getItem(key);
+        try {
+          value = JSON.parse(value);
+          this.setState({ [key]: value });
+        } catch (e) {
+          this.setState({ [key]: value });
+        }
+      }
+    }
+  }
+
+  saveStateToLocalStorage() {
+    for (let key in this.state) {
+      localStorage.setItem(key, JSON.stringify(this.state[key]))
+    }
+  }
+
   generateTileData() {
-    const weatherData = this.state.data;
-    localStorage.getItem("weather");    
+    // const weatherData = this.state.data;
+    const { data: weatherData } = this.state;
     if (!weatherData) return null;
     let days = [];
     const newData = [...weatherData].filter(day => {
@@ -85,7 +109,7 @@ class App extends Component {
       value: this.state.address,
       onChange: this.onChange
     };
-    const weatherData = this.state.data;
+    const { data: weatherData } = this.state;
     return (
       <div className="App">
         <h1> Weather application </h1>
