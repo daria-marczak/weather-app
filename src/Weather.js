@@ -33,31 +33,34 @@ const Weather = (props) => {
               <i className="fas fa-thermometer-quarter" />
             </div>
             <div className="column">
-              <p>Min temperature: {props.selectedDay.main.temp_min}</p>
+              <p>Min temperature: {Math.round(props.selectedDay.main.temp_min)}°C</p>
             </div>
           </div>
-          <div className="columns is-gapless">
-            <div className="column is-one-fifth">
-              <i className="fas fa-tachometer-alt" />
-            </div>
-            <div className="column">
-              <p>Pressure: {props.selectedDay.main.pressure}</p>
-            </div>
-          </div>
+
           <div className="columns is-gapless">
             <div className="column is-one-fifth">
               <i className="fas fa-thermometer-three-quarters" />
             </div>
             <div className="column">
-            <p>Max temperature: {props.selectedDay.main.temp_max}</p>
+              <p>Max temperature: {Math.round(props.selectedDay.main.temp_max)}°C</p>
             </div>
           </div>
+          <div className="columns is-gapless">
+            <div className="column is-one-fifth">
+            
+            <i className="fas fa-tachometer-alt" />
+            </div>
+            <div className="column">
+            <p>Pressure: {props.selectedDay.main.pressure} hPa</p>
+            </div>
+          </div>
+
           <div className="columns is-gapless">
             <div className="column is-one-fifth">
               <i className="fas fa-cloud" />
             </div>
             <div className="column">
-              <p>Wind speed: {`${props.selectedDay.wind.speed}`}</p>
+              <p>Wind speed: {props.selectedDay.wind.speed} meter/sec</p>
             </div>
           </div>
         </div>

@@ -19,9 +19,8 @@ const WeatherTile = (props) => {
   if (!(code > 699 && code < 800) && !(code > 899 && code < 1000)) {
     icon = "day-" + icon;
   };
-
   return (
-    <li className="column WeatherTile is-one-fifth" onClick={() => props.onDaySelect(props.selectedDay)}>
+    <li className="column WeatherTile is-one-fifth" onClick={() => props.onDaySelect(props)}>
       <h3>{ moment(props.dt_txt).calendar().split(" at")[0] }</h3>
       <div className="inside">
         <p className="temperature">{Math.round(props.main.temp) + "°C"}</p>

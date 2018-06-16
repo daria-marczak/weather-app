@@ -15,7 +15,8 @@ class App extends Component {
       lat: null,
       lng: null,
       data: {},
-      selectedDay: null
+      selectedDay: null,
+      showWeather: false
     };
   }
 
@@ -41,7 +42,8 @@ class App extends Component {
             const dataWeather = data;
             this.setState({
               data: dataWeather.list,
-              selectedDay: dataWeather.list[0]
+              selectedDay: dataWeather.list[0],
+              showWeather: true
             });
           });
       })
@@ -73,7 +75,7 @@ class App extends Component {
           className="columns is-gapless"
           onDaySelect={this.selectDay}
         />
-        <Weather selectedDay={this.state.selectedDay} />
+        {this.state.showWeather && <Weather selectedDay={this.state.selectedDay} />}
       </div>
     );
   }
