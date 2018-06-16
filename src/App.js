@@ -4,7 +4,6 @@ import Weather from "./Weather";
 import WeatherTileList from "./WeatherTileList";
 import "./App.css";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
-import moment from "moment";
 
 const API_KEY = "API_KEY";
 
@@ -16,11 +15,13 @@ class App extends Component {
       lat: null,
       lng: null,
       data: {},
-      refresh: true
+      selectedDay: null
     };
   }
 
-  onChange = address => this.setState({ address });
+  onChange = address => {
+    this.setState({ address })
+  };
 
   handleFormSubmit = () => {
     geocodeByAddress(this.state.address)
@@ -40,12 +41,17 @@ class App extends Component {
             const dataWeather = data;
             this.setState({
               data: dataWeather.list,
-              refresh: false
+              selectedDay: dataWeather.list[0]
             });
           });
       })
       .catch(error => console.error("Error", error));
   };
+
+  selectDay = selectedDay => {
+    this.setState({ selectedDay });
+    console.log("Changing the day to " + selectedDay)
+  }
 
   render() {
     const inputProps = {
@@ -62,14 +68,12 @@ class App extends Component {
           onEnterKeyDown={this.handleFormSubmit}
           inputProps={inputProps}
         />
-        <WeatherTileList data={weatherData} />
-        {/* {weatherData && (
-          <Route
-            path="/w/:dateId"
-            exact
-            render={props => <Weather {...weatherData} {...props} />}
-          />
-        )} */}
+        <WeatherTileList
+          data={weatherData}
+          className="columns is-gapless"
+          onDaySelect={this.selectDay}
+        />
+        <Weather selectedDay={this.state.selectedDay} />
       </div>
     );
   }

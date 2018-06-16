@@ -1,41 +1,31 @@
-import React, { Component } from "react";
-import styles from "./Weather.css";
+import React from "react";
+import "./Weather.css";
 import "bulma/css/bulma.css";
-import { VictoryPie } from "victory";
 import moment from "moment";
+import {Doughnut} from 'react-chartjs-2';
 
-const Weather = props => {
-  console.log(this.props);
-  const arrayOfData = Object.assign([], this.props);
-  console.log(arrayOfData);
-  // const { "0",..."39": weatherData} = this.props;
-  // console.log(Object.values(data));
-  const selected = this.props.match.params.dateId;
-  // console.log(weatherData);
-  const today = [];
-  // const arr = Object.values(data).filter((day) => day).map(day=> day.dt == selected ? today.push(day) : false);
-  // console.log(arr);
-  // console.table(today[0].dt);
-  // const todayData = Object.values(today);
-  // const todayObj = todayData[0];
-  // const humidity = todayObj.main.humidity;
-  // // console.log(humidity);
-  // const grayPart = 100 - `${humidity}`;
-  // console.log(grayPart);
+const Weather = (props) => {
+  if (!props.selectedDay) {
+    return <div>Loading...</div>
+  }
+
+  const doughnutData = {
+    datasets: [{
+      data: [props.selectedDay.main.humidity, 100 - props.selectedDay.main.humidity],
+      backgroundColor: [
+        "#a6c1ee",
+        "#EEE9E9",
+      ]
+    }]
+  };
+
   return (
     <div className="info">
-      {/* <h2>Showing data for { moment(todayObj.dt_txt).calendar().split(" at")[0] }</h2> */}
+      <h2>Showing data for { moment(props.selectedDay.dt_txt).calendar().split(" at")[0] }</h2>
       <div className="columns">
-        <div className="column is-one-third humidity">
-          <p className="header">Humidity</p>
-          {/* <VictoryPie
-            innerRadius={80}
-            labelComponent={<span/>}
-            height={200} width={200}
-            colorScale={["#EEE", "#fbc2eb"]}
-            data={[{'key': "", 'y': `${humidity}`}, {'key': "", 'y': `${grayPart}`}] }
-          />
-          <p>{`${humidity}`}%</p> */}
+        <div className="column is-one-third">
+            <Doughnut className="doughnut" data={doughnutData} />
+            <p>Humidity: {props.selectedDay.main.humidity}%</p>
         </div>
         <div className="column otherinfo">
           <div className="columns is-gapless">
@@ -43,7 +33,7 @@ const Weather = props => {
               <i className="fas fa-thermometer-quarter" />
             </div>
             <div className="column">
-              {/* <p>Min temperature: {`${todayObj.main.temp_min}`}</p> */}
+              <p>Min temperature: {props.selectedDay.main.temp_min}</p>
             </div>
           </div>
           <div className="columns is-gapless">
@@ -51,7 +41,7 @@ const Weather = props => {
               <i className="fas fa-tachometer-alt" />
             </div>
             <div className="column">
-              {/* <p>Pressure: {`${todayObj.main.pressure}`}</p> */}
+              <p>Pressure: {props.selectedDay.main.pressure}</p>
             </div>
           </div>
           <div className="columns is-gapless">
@@ -59,7 +49,7 @@ const Weather = props => {
               <i className="fas fa-thermometer-three-quarters" />
             </div>
             <div className="column">
-              {/* <p>Max temperature: {`${todayObj.main.temp_max}`}</p> */}
+            <p>Max temperature: {props.selectedDay.main.temp_max}</p>
             </div>
           </div>
           <div className="columns is-gapless">
@@ -67,7 +57,7 @@ const Weather = props => {
               <i className="fas fa-cloud" />
             </div>
             <div className="column">
-              {/* <p>Wind speed: {`${todayObj.wind.speed}`}</p> */}
+              <p>Wind speed: {`${props.selectedDay.wind.speed}`}</p>
             </div>
           </div>
         </div>

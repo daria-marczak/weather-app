@@ -12,12 +12,14 @@ Status as for 05/02/2018: React Router is connected.
 
 Status as for 5/08/2018: React-Router renders data for specific day.
 
+Status as for 06/16/2018: Changed React-Router to function onClick, refactored most components to functional ones.
+
 
 Milestones:
 - [x] Google Autocomplete working
 - [x] Weather icons showing
 - [x] Bulma incorporated
 - [x] Moment to format dates 
-- [x] React Router to switch between days
-- [ ] Victory data charts
+- [x] React Router switched to function to show days
+- [ ] Chart.js incorporation for pie chart
 - [ ] Google Geolocalization for default search

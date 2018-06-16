@@ -2,10 +2,10 @@
    display: block;
  }
 
- .humidity {
-   max-width: 10vw;
- }
-
  h2 {
    font-size: 1.5em;
  }
+/* 
+canvas {
+   padding-top: 2em;
+ } */

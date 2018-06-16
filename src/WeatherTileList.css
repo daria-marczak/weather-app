@@ -1,0 +1,11 @@
+ul {
+  max-width: 80%;
+  align-items: center;
+}
+
+@media (max-width: 1200px) {
+  ul {
+    max-width: 75%;
+    align-items: center;    
+  }
+}
