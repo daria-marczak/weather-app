@@ -18,26 +18,26 @@ const Weather = (props) => {
       ]
     }]
   };
-
+  
   return (
     <div className="info">
       <h2>Showing data for { moment(props.selectedDay.dt_txt).calendar().split(" at")[0] }</h2>
-      <div className="columns">
-        <div className="column is-one-third">
+      <div className="columns is-mobile">
+        <div className="column is-one-third is-mobile">
             <Doughnut className="doughnut" data={doughnutData} />
             <p>Humidity: {props.selectedDay.main.humidity}%</p>
         </div>
         <div className="column otherinfo">
-          <div className="columns is-gapless">
+          <div className="columns is-gapless is-mobile">
             <div className="column is-one-fifth">
               <i className="fas fa-thermometer-quarter" />
             </div>
-            <div className="column">
+            <div className="column is-mobile">
               <p>Min temperature: {Math.round(props.selectedDay.main.temp_min)}°C</p>
             </div>
           </div>
 
-          <div className="columns is-gapless">
+          <div className="columns is-gapless is-mobile">
             <div className="column is-one-fifth">
               <i className="fas fa-thermometer-three-quarters" />
             </div>
@@ -45,7 +45,7 @@ const Weather = (props) => {
               <p>Max temperature: {Math.round(props.selectedDay.main.temp_max)}°C</p>
             </div>
           </div>
-          <div className="columns is-gapless">
+          <div className="columns is-gapless is-mobile">
             <div className="column is-one-fifth">
             
             <i className="fas fa-tachometer-alt" />
@@ -55,7 +55,7 @@ const Weather = (props) => {
             </div>
           </div>
 
-          <div className="columns is-gapless">
+          <div className="columns is-gapless is-mobile">
             <div className="column is-one-fifth">
               <i className="fas fa-cloud" />
             </div>

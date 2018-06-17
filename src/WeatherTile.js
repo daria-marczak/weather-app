@@ -20,7 +20,7 @@ const WeatherTile = (props) => {
     icon = "day-" + icon;
   };
   return (
-    <li className="column WeatherTile is-one-fifth" onClick={() => props.onDaySelect(props)}>
+    <li className="column WeatherTile is-one-fifth is-one-fifth-mobile" onClick={() => props.onDaySelect(props)}>
       <h3>{ moment(props.dt_txt).calendar().split(" at")[0] }</h3>
       <div className="inside">
         <p className="temperature">{Math.round(props.main.temp) + "°C"}</p>

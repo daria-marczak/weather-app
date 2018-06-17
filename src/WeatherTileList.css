@@ -1,6 +1,6 @@
 ul {
   max-width: 80%;
-  align-items: center;
+  justify-content: space-between;
 }
 
 @media (max-width: 1200px) {

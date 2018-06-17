@@ -21,7 +21,7 @@ const WeatherTileList = ( props ) => {
   });
 
   return (
-    <ul className="columns">
+    <ul className="columns is-mobile">
     { Tiles }
     </ul>
   );

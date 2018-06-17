@@ -72,7 +72,7 @@ class App extends Component {
         />
         <WeatherTileList
           data={weatherData}
-          className="columns is-gapless"
+          className="columns is-mobile"
           onDaySelect={this.selectDay}
         />
         {this.state.showWeather && <Weather selectedDay={this.state.selectedDay} />}
